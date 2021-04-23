@@ -9,6 +9,7 @@ module.exports = {
 		ecmaVersion: 12,
 		sourceType: 'module',
 	},
+	ignorePatterns: ['dist/', 'lib/'],
 	rules: {
 		indent: ['error', 'tab'],
 		'linebreak-style': ['error', 'unix'],
