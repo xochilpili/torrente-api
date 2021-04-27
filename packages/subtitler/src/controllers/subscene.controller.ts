@@ -10,10 +10,13 @@ import {
 	ISubSceneSubItem,
 	IOptionHeaders,
 	ISubSceneSubtitle,
+	LoaderType,
+	IController,
 } from '@paranoids/types';
 import Parsers from '../utils/parsers';
 
-export default class Subscene {
+export class Subscene implements IController {
+	discriminator = LoaderType.DISCRIMINATOR_LOADER;
 	private _provider: ISubtitlerProvider;
 	private _xray: xray;
 

@@ -4,4 +4,5 @@ export { ISearchOptions, IGenericSubtitle } from './models/subtitler.d';
 export { IOptionHeaders } from './models/utils';
 export { ISubSceneItemScraper, ISubSceneItem, ISubSceneSubItem, ISubSceneSubtitle } from './models/subscene.d';
 export { IOpenSubsItem } from './models/opensubs';
-export { IMovieRow, IReleaseRow, IKriteria } from './models/db-items';
+export { IMovieRow, IKriteria } from './models/db-items';
+export { LoaderType, IController } from './models/controllers';

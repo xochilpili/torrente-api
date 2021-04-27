@@ -4,12 +4,16 @@ import {
 	ISubdivxItem,
 	ISearchOptions,
 	IGenericSubtitle,
+	LoaderType,
+	IController,
 } from '@paranoids/types';
 import xray from 'x-ray-scraper/Xray';
 import * as queryString from 'querystring';
 import { baseHeaders, makeDriver } from './../utils/make-driver';
 import Parsers from '../utils/parsers';
-export default class Subdivx {
+
+export class Subdivx implements IController {
+	discriminator = LoaderType.DISCRIMINATOR_LOADER;
 	private _provider: ISubtitlerProvider;
 	private _xray;
 	constructor(provider: ISubtitlerProvider) {

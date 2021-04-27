@@ -11,7 +11,8 @@ export interface IItemsSelector {
 }
 export interface ISubtitlerProvider {
 	type: 'scraper' | 'json';
-	name: 'subdivx' | 'subscene' | 'opensubtitles';
+	name: 'Subdivx' | 'Subscene' | 'OpenSubtitles';
+	active: boolean;
 	baseUrl?: string;
 	lang?: number[];
 	itemSelector?: string;

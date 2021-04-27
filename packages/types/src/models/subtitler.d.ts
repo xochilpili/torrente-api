@@ -1,12 +1,12 @@
 export interface ISearchOptions {
 	query: string;
 	lang?: string[];
-	extensions?: string[];
-	limit?: 'all' | 'best' | number;
-	imdbid?: string;
-	fps?: number;
+	year?: string;
 	season?: number;
 	episode?: number;
+	provider?: 'subdivx' | 'subscene' | 'opensubtitles';
+	releases?: string[];
+	quality?: string[];
 }
 
 export interface IGenericSubtitle {

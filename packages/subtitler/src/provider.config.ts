@@ -2,7 +2,8 @@ import { ISubtitlerProvider } from '@paranoids/types';
 export const Providers: ISubtitlerProvider[] = [
 	{
 		type: 'scraper',
-		name: 'subdivx',
+		name: 'Subdivx',
+		active: true,
 		baseUrl: 'https://www.subdivx.com/index.php?buscar=',
 		itemSelector: '#contenedor_izq',
 		itemsSelector: {
@@ -14,7 +15,8 @@ export const Providers: ISubtitlerProvider[] = [
 	},
 	{
 		type: 'scraper',
-		name: 'subscene',
+		name: 'Subscene',
+		active: true,
 		baseUrl: 'https://subscene.com/subtitles/searchbytitle',
 		lang: [38],
 		itemSelector: '.search-result ul li',
@@ -31,7 +33,8 @@ export const Providers: ISubtitlerProvider[] = [
 	},
 	{
 		type: 'json',
-		name: 'opensubtitles',
+		name: 'OpenSubtitles',
+		active: true,
 		userAgent: '',
 		username: '',
 		password: '',

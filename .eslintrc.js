@@ -17,6 +17,7 @@ module.exports = {
 		strict: [2, 'never'],
 		semi: ['error', 'always'],
 		'no-console': 2,
+		'no-mixed-spaces-and-tabs': ['warn', 'smart-tabs'],
 	},
 	settings: {
 		'import/resolver': {

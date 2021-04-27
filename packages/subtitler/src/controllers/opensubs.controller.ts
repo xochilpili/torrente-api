@@ -1,8 +1,9 @@
-import { ISearchOptions, ISubtitlerProvider, IGenericSubtitle, IOpenSubsItem } from '@paranoids/types';
+import { ISearchOptions, ISubtitlerProvider, IGenericSubtitle, IOpenSubsItem, IController, LoaderType } from '@paranoids/types';
 import OS from 'opensubtitles-api';
 import Parsers from '../utils/parsers';
 
-export default class OpenSubsController {
+export class OpenSubtitles implements IController {
+	discriminator = LoaderType.DISCRIMINATOR_LOADER;
 	private _provider: ISubtitlerProvider;
 	private _osClient: OS;
 	constructor(provider: ISubtitlerProvider) {
@@ -20,8 +21,9 @@ export default class OpenSubsController {
 		const results: IOpenSubsItem[] = await this._osClient.search({
 			...searchOptions,
 			sublanguageid: searchOptions.lang.join(','),
+			limit: 'all', // best | number
 		});
-		const items: IOpenSubsItem[] = Object.values(results);
+		const items: IOpenSubsItem[] = Object.values(results).flat(1);
 		return items.map((item: IOpenSubsItem) =>
 			Parsers.parseSubtitle({ ...item, provider: 'opensubtitles', title: item.filename, link: item.utf8 })
 		);

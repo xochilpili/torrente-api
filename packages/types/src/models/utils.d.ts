@@ -1,6 +1,6 @@
 export interface IOptionHeaders {
 	url?: string;
-	headers?: object;
+	headers?: { [key: string]: string };
 	method?: string;
 	cookie?: string;
 	body?: string;
