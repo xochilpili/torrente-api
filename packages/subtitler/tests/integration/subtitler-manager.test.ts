@@ -81,12 +81,12 @@ describe('Subtitler Manager Integration Tests', () => {
 
 	it('should deactive a provider', () => {
 		manager.deactiveProvider('opensubtitles');
-		expect(manager.activeProviders().length).toBe(2);
+		expect(manager.getActiveProviders().length).toBe(2);
 	});
 
 	it('should activate a provider', () => {
 		manager.activateProvider('opensubtitles');
-		expect(manager.activeProviders().length).toBe(3);
+		expect(manager.getActiveProviders().length).toBe(3);
 	});
 
 	it('should return valid subtitles with provider opensubtitles', async () => {

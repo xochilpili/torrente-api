@@ -10,7 +10,7 @@ export class SubtitlerManager {
 		this._controllers = this.loadAllControllers(Controllers);
 	}
 
-	public activeProviders(): ISubtitlerProvider[] {
+	public getActiveProviders(): ISubtitlerProvider[] {
 		return this._providers.filter((provider) => provider.active);
 	}
 
@@ -31,8 +31,8 @@ export class SubtitlerManager {
 				.filter((controller) =>
 					searchOptions.provider
 						? controller.constructor.name.toLowerCase() === searchOptions.provider.toLowerCase()
-						: this.activeProviders().some(
-							(provider) => controller.constructor.name.toLowerCase() === provider.name.toLowerCase()
+						: this.getActiveProviders().some(
+								(provider) => controller.constructor.name.toLowerCase() === provider.name.toLowerCase()
 						  )
 				)
 				.map(async (controller) => await controller.searchSubtitles(searchOptions))
@@ -83,14 +83,14 @@ export class SubtitlerManager {
 			.map(
 				(__class) =>
 					new __class(
-						this.activeProviders().filter(
+						this.getActiveProviders().filter(
 							(provider) => provider.name.toLowerCase() === __class.name.toString().toLowerCase()
 						)[0]
 					)
 			)
 			.filter((value) => value.discriminator === LoaderType.DISCRIMINATOR_LOADER)
 			.filter((__class) =>
-				this.activeProviders().some(
+				this.getActiveProviders().some(
 					(provider) => __class.constructor.name.toString().toLowerCase() === provider.name.toLowerCase()
 				)
 			);
