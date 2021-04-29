@@ -43,16 +43,13 @@ export class Subscene implements IController {
 				body: `query=${queryString.escape(searchOptions.query)}&l=`,
 			};
 			this._xray.driver(makeDriver(options));
-			const results: ISubSceneItemScraper[] = await this._xray(
-				this._provider.baseUrl,
-				this._provider.itemSelector,
-				[
-					{
-						title: this._provider.itemsSelector.titleSelector,
-						link: this._provider.itemsSelector.linkPageSelector,
-					} as ISubSceneItemScraper,
-				]
-			);
+			const results: ISubSceneItemScraper[] = await this._xray(this._provider.baseUrl, this._provider.itemSelector, [
+				{
+					title: this._provider.itemsSelector.titleSelector,
+					link: this._provider.itemsSelector.linkPageSelector,
+				} as ISubSceneItemScraper,
+			]);
+
 			const subtitles = await this.delayProcess(results);
 			return subtitles;
 		} catch (error) {
@@ -77,17 +74,14 @@ export class Subscene implements IController {
 	}
 
 	private async subProcess(subtitle: ISubSceneItemScraper): Promise<IGenericSubtitle[]> {
-		const links: ISubSceneSubItem[] = await this._xray(
-			subtitle.link,
-			this._provider.itemsSelector.subItemSelector,
-			[
-				{
-					link: this._provider.itemsSelector.subItemLinkPageSelector,
-					lang: this._provider.itemsSelector.subItemLangSelector,
-					filename: this._provider.itemsSelector.subItemFilenameSelector,
-				},
-			] as ISubSceneSubItem[]
-		);
+		const links: ISubSceneSubItem[] = await this._xray(subtitle.link, this._provider.itemsSelector.subItemSelector, [
+			{
+				link: this._provider.itemsSelector.subItemLinkPageSelector,
+				lang: this._provider.itemsSelector.subItemLangSelector,
+				filename: this._provider.itemsSelector.subItemFilenameSelector,
+			},
+		] as ISubSceneSubItem[]);
+
 		if (links) {
 			const sub = links.map(async (item: ISubSceneSubItem) => {
 				const dwnLnk = await this._xray(item.link, this._provider.itemsSelector.downLinkSelector);

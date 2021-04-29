@@ -14,7 +14,12 @@ export class SubtitlerManager {
 		return this._providers.filter((provider) => provider.active);
 	}
 
-	public deactiveProvider(provider: string): void {
+	public activateProvider(provider: 'subdivx' | 'subscene' | 'opensubtitles'): void {
+		this._providers.filter((p) => {
+			if (p.name.toLowerCase() === provider.toLowerCase()) p.active = true;
+		});
+	}
+	public deactiveProvider(provider: 'subdivx' | 'subscene' | 'opensubtitles'): void {
 		this._providers.filter((p) => {
 			if (p.name.toLowerCase() === provider.toLowerCase()) p.active = false;
 		});
@@ -27,7 +32,7 @@ export class SubtitlerManager {
 					searchOptions.provider
 						? controller.constructor.name.toLowerCase() === searchOptions.provider.toLowerCase()
 						: this.activeProviders().some(
-								(provider) => controller.constructor.name.toLowerCase() === provider.name.toLowerCase()
+							(provider) => controller.constructor.name.toLowerCase() === provider.name.toLowerCase()
 						  )
 				)
 				.map(async (controller) => await controller.searchSubtitles(searchOptions))

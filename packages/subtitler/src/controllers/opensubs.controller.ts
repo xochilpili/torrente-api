@@ -23,9 +23,11 @@ export class OpenSubtitles implements IController {
 			sublanguageid: searchOptions.lang.join(','),
 			limit: 'all', // best | number
 		});
-		const items: IOpenSubsItem[] = Object.values(results).flat(1);
-		return items.map((item: IOpenSubsItem) =>
-			Parsers.parseSubtitle({ ...item, provider: 'opensubtitles', title: item.filename, link: item.utf8 })
-		);
+		if (results) {
+			const items: IOpenSubsItem[] = Object.values(results).flat(1);
+			return items.map((item: IOpenSubsItem) =>
+				Parsers.parseSubtitle({ ...item, provider: 'opensubtitles', title: item.filename, link: item.utf8 })
+			);
+		}
 	}
 }
