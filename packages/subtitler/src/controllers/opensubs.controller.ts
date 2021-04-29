@@ -9,7 +9,7 @@ export class OpenSubtitles implements IController {
 	constructor(provider: ISubtitlerProvider) {
 		this._provider = provider;
 		this._osClient = new OS({
-			useragent: this._provider.userAgent,
+			useragent: this._provider.userAgent || 'TempUserAgent',
 			username: this._provider.username,
 			password: this._provider.password,
 			ssl: true,
