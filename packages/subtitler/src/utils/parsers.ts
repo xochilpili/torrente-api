@@ -124,38 +124,38 @@ export default class Parsers {
 		let matchQuality: string[];
 		let matchYear: string[];
 		switch (item.provider) {
-			case 'subdivx':
-				matchReleases = Parsers.parseReleases(item.desc);
-				matchQuality = Parsers.parseQuality(item.desc);
-				matchYear = Parsers.parseYear(item.title);
-				item.type = Parsers.parseType(item.title);
-				item.title = item.title.replace(/subtitulos\sde/gim, '');
-				item.releases = matchReleases ? Helpers.uniqArray(matchReleases) : [];
-				item.quality = matchQuality ? Helpers.uniqArray(matchQuality) : [];
-				item.year = matchYear ? Helpers.uniqArray(matchYear).join('') : null;
-				break;
-			case 'subscene':
-				item.filename = Parsers.sanitizeString(item.filename);
-				matchReleases = Parsers.parseReleases(item.filename);
-				matchQuality = Parsers.parseQuality(item.filename);
-				matchYear = Parsers.parseYear(item.filename);
+		case 'subdivx':
+			matchReleases = Parsers.parseReleases(item.desc);
+			matchQuality = Parsers.parseQuality(item.desc);
+			matchYear = Parsers.parseYear(item.title);
+			item.type = Parsers.parseType(item.title);
+			item.title = item.title.replace(/subtitulos\sde/gim, '');
+			item.releases = matchReleases ? Helpers.uniqArray(matchReleases) : [];
+			item.quality = matchQuality ? Helpers.uniqArray(matchQuality) : [];
+			item.year = matchYear ? Helpers.uniqArray(matchYear).join('') : null;
+			break;
+		case 'subscene':
+			item.filename = Parsers.sanitizeString(item.filename);
+			matchReleases = Parsers.parseReleases(item.filename);
+			matchQuality = Parsers.parseQuality(item.filename);
+			matchYear = Parsers.parseYear(item.filename);
 
-				item.type = Parsers.parseType(item.filename);
-				item.lang = Parsers.sanitizeString(item.lang);
-				item.releases = matchReleases ? Helpers.uniqArray(matchReleases) : [];
-				item.quality = matchQuality ? Helpers.uniqArray(matchQuality) : [];
-				item.year = matchYear ? Helpers.uniqArray(matchYear).join('') : null;
-				break;
-			case 'opensubtitles':
-				matchReleases = Parsers.parseReleases(item.filename);
-				matchQuality = Parsers.parseQuality(item.filename);
-				matchYear = Parsers.parseYear(item.filename);
+			item.type = Parsers.parseType(item.filename);
+			item.lang = Parsers.sanitizeString(item.lang);
+			item.releases = matchReleases ? Helpers.uniqArray(matchReleases) : [];
+			item.quality = matchQuality ? Helpers.uniqArray(matchQuality) : [];
+			item.year = matchYear ? Helpers.uniqArray(matchYear).join('') : null;
+			break;
+		case 'opensubtitles':
+			matchReleases = Parsers.parseReleases(item.filename);
+			matchQuality = Parsers.parseQuality(item.filename);
+			matchYear = Parsers.parseYear(item.filename);
 
-				item.type = Parsers.parseType(item.filename);
-				item.releases = matchReleases ? Helpers.uniqArray(matchReleases) : [];
-				item.quality = matchQuality ? Helpers.uniqArray(matchQuality) : [];
-				item.year = matchYear ? Helpers.uniqArray(matchYear).join('') : null;
-				break;
+			item.type = Parsers.parseType(item.filename);
+			item.releases = matchReleases ? Helpers.uniqArray(matchReleases) : [];
+			item.quality = matchQuality ? Helpers.uniqArray(matchQuality) : [];
+			item.year = matchYear ? Helpers.uniqArray(matchYear).join('') : null;
+			break;
 		}
 
 		item.title = Parsers.sanitizeString(item.title);

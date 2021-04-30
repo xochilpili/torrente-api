@@ -34,9 +34,7 @@ export class Subdivx implements IController {
 	private async getSubtitles(searchOptions: ISearchOptions): Promise<IGenericSubtitle[]> {
 		try {
 			const results: ISubdivxItemScraper = await this._xray(
-				`${this._provider.baseUrl}${queryString.escape(
-					searchOptions.query
-				)}&accion=5&masdesc=&subtitulos=1&realiza_b=1`,
+				`${this._provider.baseUrl}${queryString.escape(searchOptions.query)}&accion=5&masdesc=&subtitulos=1&realiza_b=1`,
 				this._provider.itemSelector,
 				{
 					titles: [this._provider.itemsSelector.titleSelector],

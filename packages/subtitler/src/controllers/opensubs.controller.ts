@@ -20,7 +20,7 @@ export class OpenSubtitles implements IController {
 		await this._osClient.login();
 		const results: IOpenSubsItem[] = await this._osClient.search({
 			...searchOptions,
-			sublanguageid: searchOptions.lang.join(','),
+			sublanguageid: searchOptions.lang?.join(',') || 'spa', // TODO: fix this
 			limit: 'all', // best | number
 		});
 		if (results) {

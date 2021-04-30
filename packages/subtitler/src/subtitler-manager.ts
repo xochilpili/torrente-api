@@ -32,7 +32,7 @@ export class SubtitlerManager {
 					searchOptions.provider
 						? controller.constructor.name.toLowerCase() === searchOptions.provider.toLowerCase()
 						: this.getActiveProviders().some(
-								(provider) => controller.constructor.name.toLowerCase() === provider.name.toLowerCase()
+							(provider) => controller.constructor.name.toLowerCase() === provider.name.toLowerCase()
 						  )
 				)
 				.map(async (controller) => await controller.searchSubtitles(searchOptions))
@@ -44,11 +44,11 @@ export class SubtitlerManager {
 	private subFilter(searchOptions: ISearchOptions, subtitles: IGenericSubtitle[]): IGenericSubtitle[] {
 		let filtered: IGenericSubtitle[] = subtitles;
 		if (searchOptions.season) {
-			filtered = filtered.filter((subtitle) => subtitle.season === searchOptions.season);
+			filtered = filtered.filter((subtitle) => subtitle.season === +searchOptions.season);
 		}
 
 		if (searchOptions.episode) {
-			filtered = filtered.filter((subtitle) => subtitle.episode === searchOptions.episode);
+			filtered = filtered.filter((subtitle) => subtitle.episode === +searchOptions.episode);
 		}
 
 		if (searchOptions.releases) {
