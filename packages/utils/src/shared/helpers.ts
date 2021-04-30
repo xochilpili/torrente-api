@@ -1,4 +1,4 @@
-export default class Helpers {
+export class Helpers {
 	static uniqArray(elements: string[]): string[] {
 		return elements
 			.map((item) => item.toLowerCase())

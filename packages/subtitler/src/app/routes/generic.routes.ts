@@ -1,5 +1,5 @@
 import { Request, Response } from 'express';
-import { ISearchOptions, IGenericSubtitle, ISubtitlerProvider } from '@paranoids/types';
+import { ISearchOptions, IGenericSubtitle, ISubtitlerProvider } from '@paranoids/torrente-types';
 import { SubtitlerManager } from './../../subtitler-manager';
 
 export async function GetProvidersRoute(req: Request, res: Response): Promise<Response<ISubtitlerProvider[]>> {

@@ -1,5 +1,5 @@
 import { Providers } from './provider.config';
-import { IController, LoaderType, ISubtitlerProvider, IGenericSubtitle, ISearchOptions } from '@paranoids/types';
+import { IController, LoaderType, ISubtitlerProvider, IGenericSubtitle, ISearchOptions } from '@paranoids/torrente-types';
 import * as Controllers from './controllers';
 export class SubtitlerManager {
 	private _providers: ISubtitlerProvider[];

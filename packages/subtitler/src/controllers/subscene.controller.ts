@@ -1,4 +1,3 @@
-import { makeDriver } from './../utils/make-driver';
 import xray from 'x-ray-scraper/Xray';
 import * as queryString from 'querystring';
 import {
@@ -12,8 +11,8 @@ import {
 	ISubSceneSubtitle,
 	LoaderType,
 	IController,
-} from '@paranoids/types';
-import Parsers from '../utils/parsers';
+} from '@paranoids/torrente-types';
+import { Parsers, makeDriver } from '@paranoids/torrente-utils';
 
 export class Subscene implements IController {
 	discriminator = LoaderType.DISCRIMINATOR_LOADER;

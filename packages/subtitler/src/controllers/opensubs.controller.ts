@@ -1,6 +1,13 @@
-import { ISearchOptions, ISubtitlerProvider, IGenericSubtitle, IOpenSubsItem, IController, LoaderType } from '@paranoids/types';
+import {
+	ISearchOptions,
+	ISubtitlerProvider,
+	IGenericSubtitle,
+	IOpenSubsItem,
+	IController,
+	LoaderType,
+} from '@paranoids/torrente-types';
 import OS from 'opensubtitles-api';
-import Parsers from '../utils/parsers';
+import { Parsers } from '@paranoids/torrente-utils';
 
 export class OpenSubtitles implements IController {
 	discriminator = LoaderType.DISCRIMINATOR_LOADER;

@@ -1,6 +1,6 @@
 #!/usr/bin/env node
 import commander, { Option } from 'commander';
-import { ISearchOptions } from '@paranoids/types';
+import { ISearchOptions } from '@paranoids/torrente-types';
 import { SubtitlerManager } from './subtitler-manager';
 
 commander

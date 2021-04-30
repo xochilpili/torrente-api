@@ -1,4 +1,4 @@
-import { ISubtitlerProvider } from '@paranoids/types';
+import { ISubtitlerProvider } from '@paranoids/torrente-types';
 export const Providers: ISubtitlerProvider[] = [
 	{
 		type: 'scraper',

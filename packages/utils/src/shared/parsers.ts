@@ -1,10 +1,10 @@
-import { IGenericSubtitle, IOpenSubsItem, ISubdivxItem, ISubSceneSubtitle } from '@paranoids/types';
-import Helpers from './helpers';
+import { IGenericSubtitle, IOpenSubsItem, ISubdivxItem, ISubSceneSubtitle } from '@paranoids/torrente-types';
+import { Helpers } from './helpers';
 import * as settingsParsers from '../parsers-config.json';
 
 export type ISubdivxItemType = ISubdivxItem;
 
-export default class Parsers {
+export class Parsers {
 	static parseType(value: string): 'serie' | 'movie' | 'sport' {
 		if (typeof value === 'string') {
 			let regex: string[] | null;

@@ -6,11 +6,10 @@ import {
 	IGenericSubtitle,
 	LoaderType,
 	IController,
-} from '@paranoids/types';
+} from '@paranoids/torrente-types';
 import xray from 'x-ray-scraper/Xray';
 import * as queryString from 'querystring';
-import { baseHeaders, makeDriver } from './../utils/make-driver';
-import Parsers from '../utils/parsers';
+import { Parsers, baseHeaders, makeDriver } from '@paranoids/torrente-utils';
 
 export class Subdivx implements IController {
 	discriminator = LoaderType.DISCRIMINATOR_LOADER;
