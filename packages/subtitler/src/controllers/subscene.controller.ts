@@ -12,7 +12,7 @@ import {
 	LoaderType,
 	IController,
 } from '@paranoids/torrente-types';
-import { Parsers, makeDriver } from '@paranoids/torrente-utils';
+import { Parsers, makeDriver, Helpers } from '@paranoids/torrente-utils';
 
 export class Subscene implements IController {
 	discriminator = LoaderType.DISCRIMINATOR_LOADER;
@@ -31,12 +31,14 @@ export class Subscene implements IController {
 
 	private async getSubtitles(searchOptions: ISearchOptions): Promise<IGenericSubtitle[]> {
 		try {
+			const langs = searchOptions.lang.map((lang) => {
+				if (lang == 'spa') return 38;
+				if (lang == 'eng') return 13;
+			});
 			const options: IOptionHeaders = {
 				headers: {
 					'content-type': 'application/x-www-form-urlencoded',
-					cookie: `LanguageFilter=${
-						Array.isArray(this._provider.lang) ? this._provider.lang.join(',') : this._provider.lang
-					}`,
+					cookie: `LanguageFilter=${Array.isArray(langs) ? langs.join(',') : this._provider.lang}`,
 				},
 				method: 'POST',
 				body: `query=${queryString.escape(searchOptions.query)}&l=`,
@@ -61,15 +63,9 @@ export class Subscene implements IController {
 	private async delayProcess(results: any[]): Promise<any[]> {
 		return await results.reduce(async (accP, item: ISubSceneItemScraper) => {
 			const acc: ISubSceneItem[] = await accP;
-			await this.sleep(2000);
+			await Helpers.sleep(2000);
 			return [...acc, await this.subProcess(item)];
 		}, []);
-	}
-
-	private async sleep(ms: number): Promise<void> {
-		return new Promise((resolve) => {
-			setTimeout(resolve, ms);
-		});
 	}
 
 	private async subProcess(subtitle: ISubSceneItemScraper): Promise<IGenericSubtitle[]> {

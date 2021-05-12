@@ -7,4 +7,10 @@ export class Helpers {
 			.map((element) => elements[element])
 			.map((item) => item.toLowerCase());
 	}
+
+	static async sleep(ms: number): Promise<void> {
+		return new Promise((resolve) => {
+			setTimeout(resolve, ms);
+		});
+	}
 }

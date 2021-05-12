@@ -15,14 +15,11 @@ export async function GetSubtitlesRoute(req: Request, res: Response): Promise<Re
 		...searchOptions,
 		...(searchOptions.season &&
 			searchOptions.episode && {
-			query: `${searchOptions.query} s${searchOptions.season
-				.toString()
-				.padStart(2, '0')}e${searchOptions.episode.toString().padStart(2, '0')}`,
+			query: `${searchOptions.query} s${searchOptions.season.toString().padStart(2, '0')}e${searchOptions.episode.toString().padStart(2, '0')}`,
 		}),
-		...(searchOptions.season &&
-			!searchOptions.episode && { query: `${searchOptions.query} s${searchOptions.season.toString().padStart(2, '0')}` }),
+		...(searchOptions.season && !searchOptions.episode && { query: `${searchOptions.query} s${searchOptions.season.toString().padStart(2, '0')}` }),
 		...(!searchOptions.season && !searchOptions.episode && searchOptions.query && { query: searchOptions.query }),
 	});
 	req.log.info({ searchOptions }, 'Searching subtitles');
-	return res.status(200).json(subtitles);
+	return res.status(200).json(subtitles || []);
 }

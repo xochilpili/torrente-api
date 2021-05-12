@@ -35,8 +35,8 @@ export const Providers: ISubtitlerProvider[] = [
 		type: 'json',
 		name: 'OpenSubtitles',
 		active: true,
-		userAgent: '',
-		username: '',
-		password: '',
+		userAgent: 'Torrente v1',
+		username: 'xochilpili',
+		password: 'x0chetzalt',
 	},
 ];

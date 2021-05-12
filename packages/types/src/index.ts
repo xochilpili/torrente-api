@@ -5,4 +5,7 @@ export { IOptionHeaders } from './models/utils';
 export { ISubSceneItemScraper, ISubSceneItem, ISubSceneSubItem, ISubSceneSubtitle } from './models/subscene.d';
 export { IOpenSubsItem } from './models/opensubs';
 export { LoaderType, IController } from './models/controllers';
-export { IMovieProvider } from './models/torrente-provider';
+export { IMovieProvider } from './models/media-provider-config';
+export { IMediaItem, IMediaSearchOptions, IPlexCredentials, IPlexSettings } from './models/media';
+export { IGenericItem } from './models/media-provider-items';
+export { ITorrentSearchOptions, ITorrentItem, Provider, IGenericTorrent } from './models/torrent';

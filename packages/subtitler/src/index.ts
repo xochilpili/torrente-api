@@ -24,6 +24,7 @@ const validator = createValidator();
 const validatorSearchSchema = Joi.object({
 	provider: Joi.string().valid('subdivx', 'subscene', 'opensubtitles').optional(),
 	query: Joi.string().required(),
+	lang: Joi.array().items(Joi.string().valid('spa', 'eng').default('spa')).required(),
 	releases: Joi.array().items(Joi.string()).optional(),
 	quality: Joi.array().items(Joi.string()).optional(),
 	year: Joi.number().optional(),
@@ -35,9 +36,9 @@ app.get('/', (req, res) => {
 	res.json({ message: 'Nope ;D' });
 });
 //app.get(`/${process.env.APP_NAME}/providers`, GetProvidersRoute);
-app.post(`/${process.env.APP_NAME}/search`, validator.body(validatorSearchSchema), GetSubtitlesRoute);
+app.post(`/${process.env.APP_NAME || 'v1'}/search`, validator.body(validatorSearchSchema), GetSubtitlesRoute);
 
-app.listen(Number(process.env.PORT) || 3001, process.env.HOST, () => {
+app.listen(Number(process.env.PORT) || 3000, process.env.HOST || 'localhost', () => {
 	// eslint-disable-next-line no-console
-	console.log(`Server started at ${process.env.PORT || 3001}`);
+	console.log(`Server started at ${process.env.PORT || 3000}`);
 });

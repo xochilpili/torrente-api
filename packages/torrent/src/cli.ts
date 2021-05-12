@@ -1,26 +1,26 @@
 #!/usr/bin/env node
 import commander, { Option, requiredOption } from 'commander';
-import { ISearchOptions } from '@paranoids/torrente-types';
-import { SubtitlerManager } from './subtitler-manager';
+import { ITorrentSearchOptions, IGenericTorrent } from '@paranoids/torrente-types';
+import { TorrentController } from './controllers/torrent.controller';
 
 commander
 	.version('2.0.0', '-v, --version')
 	.usage('[OPTIONS]...')
-	.addOption(new Option('-p, --provider <provider>', 'Use only this provider').choices(['subdivx', 'subscene', 'opensubtitles']))
+	.addOption(new Option('-p, --provider <provider>', 'Use only this provider').choices(['1337x', 'ThePirateBay', 'Limetorrents', 'Eztv', 'Rarbg', 'Yts']))
 	.requiredOption('-s, --search <string>', 'Query string to search')
 	.option('-r, --releases [groups...]', 'Filtering by this ReleaseGroups')
 	.option('-y --year <number>', 'Filtering by Year')
 	.option('-q, --quality [qualities...]', 'Filtering by Qualities')
 	.option('--season <number>', 'Season for a tvShow')
 	.option('--episode <number>', 'Episode for a tvShow')
+	.option('--limit <number>', 'Torrents limit')
 	.option('--pretty', 'Using stringify')
-	.addOption(new Option('--lang <lang>', 'Filter by Language').choices(['spa', 'eng']))
 	.parse(process.argv);
 
 const options = commander.opts();
 
-const searchOptions: ISearchOptions = {
-	...(options.provider && { provider: options.provider }),
+const searchOptions: ITorrentSearchOptions = {
+	...(options.provider && { provider: [options.provider] }),
 	...(options.releases && { releases: options.releases }),
 	...(options.quality && { quality: options.quality }),
 	...(options.year && { year: options.year }),
@@ -32,20 +32,19 @@ const searchOptions: ISearchOptions = {
 	}),
 	...(options.season && !options.episode && { query: `${options.search} s${options.season.toString().padStart(2, '0')}` }),
 	...(!options.season && !options.episode && options.search && { query: options.search }),
-	...(options.provider && options.provider === 'subscene' && { lang: options.lang ? options.lang : ['spa', 'eng'] }),
-	...(options.provider && options.provider === 'opensubtitles' && { lang: options.lang ? options.lang : ['spa', 'eng'] }),
+	...(options.limit && { torrentLimit: options.limit }),
+	category: 'All',
 };
 
 // eslint-disable-next-line no-console
 console.log(
-	`Searching subtitles for ${options.search}${options.provider ? ' provider : ' + options.provider : ''}${
-		options.season ? ' season: ' + options.season : ''
-	}${options.episode ? ' episode: ' + options.episode : ''}`
+	`Searching torrents for ${options.search}${options.provider ? ' provider : ' + options.provider : ''}${options.season ? ' season: ' + options.season : ''}${
+		options.episode ? ' episode: ' + options.episode : ''
+	}`
 );
 
 (async () => {
-	const subtitlerManager = new SubtitlerManager();
-	const subtitles = await subtitlerManager.getSubtitles(searchOptions);
+	const results: IGenericTorrent[] = await TorrentController.search(searchOptions);
 	// eslint-disable-next-line no-console
-	console.log(options.pretty ? JSON.stringify(subtitles, null, 4) : subtitles);
+	console.log(JSON.stringify(results, null, 4));
 })();
